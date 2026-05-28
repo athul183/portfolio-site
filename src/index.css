@@ -1,0 +1,507 @@
+/* ─────────────────────────────────────────────────────────────
+   Athulraj K Portfolio — Inspired by red1-for-hek.vercel.app
+   ───────────────────────────────────────────────────────────── */
+@import "tailwindcss";
+
+/* ── Tokens ─────────────────────────────────────────────────── */
+:root {
+  --bg:        #0b080c;
+  --bg-2:      #111015;
+  --accent:    #c2a4ff;
+  --accent-dim:#9b78e0;
+  --text:      #eae5ec;
+  --text-2:    #9990a0;
+  --text-3:    #4a4456;
+  --border:    rgba(234,229,236,0.08);
+  --border-2:  rgba(234,229,236,0.04);
+  --vh:        100vh;
+  --vh:        100svh;
+  --cw:        94%;
+  --cmax:      1300px;
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Geist', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--accent); }
+button { font-family: inherit; cursor: pointer; }
+
+/* ── Container ──────────────────────────────────────────────── */
+.c {
+  width: var(--cw);
+  max-width: var(--cmax);
+  margin-inline: auto;
+}
+
+/* ── Typography ─────────────────────────────────────────────── */
+.display {
+  font-family: 'Geist', sans-serif;
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.section-num {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-num::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 32px;
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+.caption {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+/* ── Loading Screen ─────────────────────────────────────────── */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #eae5ec;
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.loading-pill-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 100px;
+  background: #0b080c;
+  overflow: hidden;
+  transition: min-width 1s cubic-bezier(0.33,0.11,1,0.72),
+              min-height 1s cubic-bezier(0.33,0.11,1,0.72),
+              border-radius 1s cubic-bezier(0.33,0.11,1,0.72);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.loading-pill-wrap.expanding {
+  min-width: calc(100vw + 2000px);
+  min-height: calc(100vh + 1000px);
+  border-radius: 9999px;
+  box-shadow: none;
+}
+
+.loading-pill-hover {
+  position: absolute;
+  width: 220px;
+  height: 100px;
+  border-radius: 50%;
+  background: #c2a4ff;
+  filter: blur(35px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+  top: var(--my, 50%);
+  left: var(--mx, 50%);
+  transform: translate(-50%, -50%);
+}
+.loading-pill-wrap:hover .loading-pill-hover { opacity: 0.7; }
+.loading-pill-wrap.expanding .loading-pill-hover { opacity: 0 !important; }
+
+.loading-btn {
+  position: relative;
+  padding: 22px 64px;
+  border-radius: 100px;
+  background: transparent;
+  border: none;
+  color: #eae5ec;
+  font-family: 'Geist', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  z-index: 2;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: opacity 0.4s;
+}
+.loading-pill-wrap.expanding .loading-btn { opacity: 0; }
+
+/* ── Navbar ─────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  transition: opacity 0.3s;
+}
+.nav-inner {
+  width: var(--cw);
+  max-width: var(--cmax);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-link {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+.nav-link:hover,
+.nav-link.active { color: var(--text); }
+.nav-link:hover::after,
+.nav-link.active::after { width: 100%; }
+
+/* ── Section Layout ─────────────────────────────────────────── */
+section {
+  padding-block: 7rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hr {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Hero ───────────────────────────────────────────────────── */
+.hero-name {
+  font-family: 'Geist', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  font-size: clamp(5rem, 14vw, 13rem);
+}
+.hero-name .accent { color: var(--accent); }
+
+/* ── Marquee ────────────────────────────────────────────────── */
+@keyframes marquee-l {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-r {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 0;
+}
+.marquee-l { animation: marquee-l 30s linear infinite; }
+.marquee-r { animation: marquee-r 30s linear infinite; }
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 2rem;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  white-space: nowrap;
+  transition: color 0.2s;
+  border-right: 1px solid var(--border);
+}
+.marquee-item:hover { color: var(--text); }
+.marquee-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ── Experience items ───────────────────────────────────────── */
+.exp-item {
+  border-top: 1px solid var(--border);
+  padding-block: 2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.exp-item:last-child { border-bottom: 1px solid var(--border); }
+.exp-num {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--text-3);
+  text-transform: uppercase;
+}
+.exp-role {
+  font-family: 'Geist', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  letter-spacing: -0.01em;
+  color: var(--text);
+  line-height: 1.1;
+  transition: color 0.25s;
+}
+.exp-item:hover .exp-role { color: var(--accent); }
+.exp-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  color: var(--text-2);
+}
+.exp-current {
+  border-color: rgba(194,164,255,0.35);
+  color: var(--accent);
+  background: rgba(194,164,255,0.08);
+}
+.exp-resp {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-2);
+  padding-left: 1rem;
+  border-left: 1px solid var(--accent);
+  opacity: 0.85;
+}
+
+/* ── Skill Pills (marquee) ──────────────────────────────────── */
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-2);
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.skill-pill:hover {
+  border-color: rgba(194,164,255,0.4);
+  color: var(--text);
+  background: rgba(194,164,255,0.06);
+}
+.skill-row {
+  display: flex;
+  gap: 0.75rem;
+  width: max-content;
+  padding-block: 0.5rem;
+}
+
+/* ── Contact big link ───────────────────────────────────────── */
+.contact-email {
+  font-family: 'Geist', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  line-height: 1;
+  display: inline-block;
+  position: relative;
+  transition: color 0.25s;
+}
+.contact-email::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+.contact-email:hover { color: var(--accent); }
+.contact-email:hover::after { width: 100%; }
+
+/* ── Card ───────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+
+/* ── Buttons ────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 100px;
+  font-family: 'Geist', sans-serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  transition: all 0.22s ease;
+  white-space: nowrap;
+}
+.btn-accent {
+  background: var(--accent);
+  color: var(--bg);
+}
+.btn-accent:hover {
+  background: #d4bcff;
+  color: var(--bg);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--text-2);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover {
+  border-color: rgba(194,164,255,0.4);
+  color: var(--text);
+  background: rgba(194,164,255,0.06);
+}
+
+/* ── Form ───────────────────────────────────────────────────── */
+.input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-family: 'Geist', sans-serif;
+  font-size: 1rem;
+  padding: 1rem 0;
+  outline: none;
+  transition: border-color 0.25s;
+  resize: none;
+}
+.input::placeholder { color: var(--text-3); }
+.input:focus { border-color: var(--accent); }
+
+/* ── Progress bar ───────────────────────────────────────────── */
+.bar-track {
+  width: 100%;
+  height: 2px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 99px;
+  transform-origin: left;
+}
+
+/* ── Cursor glow ────────────────────────────────────────────── */
+.cursor-glow {
+  pointer-events: none;
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(194,164,255,0.055) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+  will-change: left, top;
+  transition: opacity 0.3s;
+}
+
+/* ── Typewriter cursor ──────────────────────────────────────── */
+.typewriter::after {
+  content: '|';
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+  color: var(--accent);
+  font-weight: 300;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ── Float ──────────────────────────────────────────────────── */
+@keyframes float-up { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.float { animation: float-up 4s ease-in-out infinite; }
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+html { scrollbar-width: thin; scrollbar-color: #2a2030 var(--bg); }
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: var(--bg); }
+::-webkit-scrollbar-thumb  { background: #2a2030; border-radius: 99px; }
+
+/* ── Animate ping ───────────────────────────────────────────── */
+@keyframes ping { 75%,100%{transform:scale(2);opacity:0} }
+.ping { animation: ping 1.4s cubic-bezier(0,0,0.2,1) infinite; }
+
+/* ── No scrollbar util ──────────────────────────────────────── */
+.no-scroll::-webkit-scrollbar { display: none; }
+.no-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
+  section { padding-block: 5rem; }
+}
