@@ -16,14 +16,28 @@ export const personalInfo = {
 export const experiences = [
   {
     id: 1,
-    role: "Engineer",
-    company: "Regami Solutions",
-    location: "Chennai",
-    period: "June 2025 – Present",
+    role: "Software Engineer",
+    company: "QWY Software",
+    location: "Remote",
+    period: "May 2026 – Present",
     type: "Full-time",
     current: true,
     color: "#00D4FF",
     icon: "🚀",
+    responsibilities: [
+      "Working as a Software Engineer at QWY Software, contributing to software development initiatives.",
+    ],
+  },
+  {
+    id: 2,
+    role: "Engineer",
+    company: "Regami Solutions",
+    location: "Chennai",
+    period: "June 2025 – April 2026",
+    type: "Full-time",
+    current: false,
+    color: "#8b5cf6",
+    icon: "⚙️",
     responsibilities: [
       "Leading DevOps initiatives by setting up and managing CI/CD pipelines for Development, QA, and Production environments using AWS, Jenkins, SonarQube, and Docker.",
       "Implementing and monitoring infrastructure using tools such as Splunk, Grafana, and Prometheus to ensure high system reliability and performance.",
@@ -31,7 +45,7 @@ export const experiences = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     role: "Junior Engineer",
     company: "Regami Solutions",
     location: "Chennai",
@@ -47,7 +61,7 @@ export const experiences = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     role: "Project Engineering Trainee – Mobile",
     company: "Regami Solutions",
     location: "Chennai",
@@ -62,7 +76,7 @@ export const experiences = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     role: "Flutter Developer Intern",
     company: "Camerinfolks Pvt. Ltd",
     location: "Kochi",
@@ -78,7 +92,7 @@ export const experiences = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     role: "Web Developer Intern",
     company: "Weamse Business Solutions",
     location: "Remote",
@@ -93,6 +107,7 @@ export const experiences = [
     ],
   },
 ];
+
 
 export const skills = {
   languages: ["Dart", "Swift", "Python", "Java", "Kotlin", "TypeScript", "JavaScript", "SQL"],
@@ -149,5 +164,5 @@ export const stats = [
   { label: "Years Experience", value: "3+", icon: "⚡" },
   { label: "Apps Built", value: "10+", icon: "📱" },
   { label: "Technologies", value: "20+", icon: "🛠️" },
-  { label: "Companies", value: "4", icon: "🏢" },
+  { label: "Companies", value: "5", icon: "🏢" },
 ];
