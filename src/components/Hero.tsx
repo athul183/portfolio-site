@@ -25,26 +25,42 @@ export default function Hero() {
         flexDirection: "column",
         justifyContent: "flex-end",
         paddingTop: "8rem",
-        paddingBottom: "4rem",
+        paddingBottom: "5rem",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Subtle purple glow */}
+      {/* Background radial glows */}
       <div
         aria-hidden
         style={{
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(ellipse 70% 60% at 15% 60%, rgba(194,164,255,0.07) 0%, transparent 65%), " +
-            "radial-gradient(ellipse 50% 40% at 80% 30%, rgba(194,164,255,0.04) 0%, transparent 60%)",
+            "radial-gradient(ellipse 65% 55% at 10% 65%, rgba(139,92,246,0.1) 0%, transparent 65%), " +
+            "radial-gradient(ellipse 45% 40% at 85% 25%, rgba(139,92,246,0.06) 0%, transparent 60%), " +
+            "radial-gradient(ellipse 30% 30% at 50% 100%, rgba(139,92,246,0.04) 0%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
 
+      {/* Subtle grid overlay */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+          pointerEvents: "none",
+          maskImage: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.5) 20%, rgba(0,0,0,0.5) 80%, transparent)",
+          WebkitMaskImage: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.5) 20%, rgba(0,0,0,0.5) 80%, transparent)",
+        }}
+      />
+
       <div className="c" style={{ position: "relative", zIndex: 1 }}>
-        {/* Top row: status + role */}
+        {/* Top row: status + location */}
         <FadeIn delay={0.05}>
           <div
             style={{
@@ -53,18 +69,22 @@ export default function Hero() {
               justifyContent: "space-between",
               flexWrap: "wrap",
               gap: "1rem",
-              marginBottom: "1.5rem",
+              marginBottom: "2rem",
             }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-              <span
-                style={{
-                  position: "relative",
-                  display: "inline-flex",
-                  width: 8,
-                  height: 8,
-                }}
-              >
+            {/* Availability badge */}
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.6rem",
+                padding: "0.4rem 1rem 0.4rem 0.6rem",
+                background: "rgba(16,185,129,0.08)",
+                border: "1px solid rgba(16,185,129,0.2)",
+                borderRadius: "100px",
+              }}
+            >
+              <span style={{ position: "relative", display: "inline-flex", width: 8, height: 8 }}>
                 <span
                   className="ping"
                   style={{
@@ -87,16 +107,37 @@ export default function Hero() {
                 />
               </span>
               <span
-                className="caption"
-                style={{ color: "#10B981", letterSpacing: "0.15em" }}
+                style={{
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#34d399",
+                  fontFamily: "var(--font-body)",
+                }}
               >
                 Available for opportunities
               </span>
             </div>
 
-            <span className="caption" style={{ color: "var(--text-3)" }}>
-              Based in Kerala, India
-            </span>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.4rem",
+                fontSize: "0.75rem",
+                fontWeight: 500,
+                color: "var(--text-3)",
+                letterSpacing: "0.06em",
+                fontFamily: "var(--font-body)",
+              }}
+            >
+              <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} style={{ flexShrink: 0 }}>
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              Kerala, India
+            </div>
           </div>
         </FadeIn>
 
@@ -120,49 +161,70 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           style={{
             height: 1,
-            background: "var(--border)",
+            background: "linear-gradient(to right, var(--border-accent), var(--border), transparent)",
             transformOrigin: "left",
             marginBlock: "2.5rem",
           }}
         />
 
-        {/* Bottom row: bio + stats + CTA */}
+        {/* Bottom row: bio + CTA | divider | stats */}
         <FadeIn delay={0.35}>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr auto",
+              gridTemplateColumns: "1fr auto 280px",
               gap: "3rem",
               alignItems: "end",
             }}
           >
-            {/* Left: description */}
+            {/* Left: description + CTAs */}
             <div>
               <p
                 style={{
-                  fontFamily: "'Geist', sans-serif",
-                  fontSize: "clamp(1rem, 1.5vw, 1.3rem)",
+                  fontFamily: "var(--font-body)",
+                  fontSize: "clamp(0.95rem, 1.4vw, 1.2rem)",
                   fontWeight: 400,
                   color: "var(--text-2)",
-                  lineHeight: 1.6,
+                  lineHeight: 1.75,
                   maxWidth: "44rem",
-                  marginBottom: "2rem",
+                  marginBottom: "0.75rem",
                 }}
               >
                 Software Engineer specialising in{" "}
-                <span style={{ color: "var(--text)", fontWeight: 600 }}>
+                <span
+                  style={{
+                    color: "var(--accent-light)",
+                    fontWeight: 700,
+                    background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
                   <Typewriter
                     words={["Flutter", "Native iOS", "Native Android", "React.js", "AWS DevOps"]}
                   />
                 </span>
-                . Building robust, user-centric mobile &amp; web applications.
+              </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: "clamp(0.95rem, 1.4vw, 1.2rem)",
+                  fontWeight: 400,
+                  color: "var(--text-2)",
+                  lineHeight: 1.75,
+                  maxWidth: "44rem",
+                  marginBottom: "2.5rem",
+                }}
+              >
+                Building robust, user-centric mobile &amp; web applications.
               </p>
 
               {/* CTA buttons */}
-              <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
                 <a href="#experience" className="btn btn-accent">
                   View My Work
-                  <ArrowDown size={14} />
+                  <ArrowDown size={13} />
                 </a>
                 <a href="#contact" className="btn btn-ghost">
                   Get In Touch
@@ -172,55 +234,81 @@ export default function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-ghost"
-                  style={{ padding: "0.75rem 1rem" }}
+                  style={{ padding: "0.7rem 0.95rem" }}
+                  aria-label="GitHub"
                 >
-                  <GithubIcon size={16} />
+                  <GithubIcon size={15} />
                 </a>
                 <a
                   href={personalInfo.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-ghost"
-                  style={{ padding: "0.75rem 1rem" }}
+                  style={{ padding: "0.7rem 0.95rem" }}
+                  aria-label="LinkedIn"
                 >
-                  <LinkedinIcon size={16} />
+                  <LinkedinIcon size={15} />
                 </a>
               </div>
             </div>
 
-            {/* Right: stats */}
+            {/* Vertical divider */}
             <div
               style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "1.5rem 2.5rem",
-                textAlign: "right",
+                width: 1,
+                alignSelf: "stretch",
+                background: "linear-gradient(to bottom, transparent, var(--border-accent), transparent)",
+                opacity: 0.5,
+              }}
+            />
+
+            {/* Right: stats as vertical list */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
               }}
             >
               {stats.map((s, i) => (
                 <motion.div
                   key={s.label}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  className="stat-item"
+                  initial={{ opacity: 0, x: 24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}
                 >
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                    <span style={{ fontSize: "1.1rem" }}>{s.icon}</span>
+                    <span
+                      style={{
+                        fontSize: "0.75rem",
+                        fontWeight: 600,
+                        color: "var(--text-3)",
+                        letterSpacing: "0.06em",
+                        textTransform: "uppercase",
+                        fontFamily: "var(--font-body)",
+                      }}
+                    >
+                      {s.label}
+                    </span>
+                  </div>
                   <div
                     style={{
                       fontFamily: "'Geist', sans-serif",
                       fontWeight: 800,
-                      fontSize: "clamp(2rem, 3.5vw, 3rem)",
+                      fontSize: "1.6rem",
                       lineHeight: 1,
-                      color: "var(--accent)",
+                      background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
                       letterSpacing: "-0.03em",
+                      flexShrink: 0,
                     }}
                   >
                     <Counter value={s.value} />
-                  </div>
-                  <div
-                    className="caption"
-                    style={{ marginTop: "0.35rem", color: "var(--text-3)" }}
-                  >
-                    {s.label}
                   </div>
                 </motion.div>
               ))}
@@ -233,20 +321,41 @@ export default function Hero() {
       <motion.div
         style={{
           position: "absolute",
-          bottom: "2rem",
-          right: "2rem",
+          bottom: "2.5rem",
+          left: "50%",
+          transform: "translateX(-50%)",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "0.5rem",
+          gap: "0.4rem",
           color: "var(--text-3)",
         }}
-        animate={{ y: [0, 7, 0] }}
+        animate={{ y: [0, 6, 0] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       >
-        <span className="caption" style={{ writingMode: "vertical-rl", letterSpacing: "0.18em" }}>Scroll</span>
-        <ArrowDown size={13} />
+        <span
+          style={{
+            fontSize: "0.62rem",
+            fontWeight: 600,
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            fontFamily: "var(--font-body)",
+          }}
+        >
+          Scroll
+        </span>
+        <ArrowDown size={12} />
       </motion.div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          #hero .hero-bottom-grid {
+            grid-template-columns: 1fr !important;
+          }
+          #hero .hero-divider-v { display: none !important; }
+          #hero .hero-stats { flex-direction: row !important; flex-wrap: wrap; }
+        }
+      `}</style>
     </section>
   );
 }

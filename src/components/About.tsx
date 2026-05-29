@@ -1,4 +1,3 @@
-
 import { MapPin, Mail, Phone } from "lucide-react";
 import { FadeIn, SectionLabel } from "./ui";
 import { personalInfo } from "../data/portfolio";
@@ -15,10 +14,43 @@ const LinkedinIcon = ({ size = 14 }: { size?: number }) => (
   </svg>
 );
 
+const traits = [
+  {
+    label: "Mobile Development",
+    detail: "Flutter · iOS · Android",
+    icon: "📱",
+    color: "#8b5cf6",
+  },
+  {
+    label: "Cloud & DevOps",
+    detail: "AWS · Jenkins · Docker · Grafana",
+    icon: "☁️",
+    color: "#00D4FF",
+  },
+  {
+    label: "Web Development",
+    detail: "React.js · TypeScript · .NET",
+    icon: "🌐",
+    color: "#10B981",
+  },
+];
+
 export default function About() {
   return (
-    <section id="about">
-      <div className="c">
+    <section id="about" style={{ position: "relative" }}>
+      {/* Subtle background glow */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(ellipse 55% 50% at 90% 50%, rgba(139,92,246,0.05) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div className="c" style={{ position: "relative", zIndex: 1 }}>
         <SectionLabel num="01" label="About Me" />
 
         <div
@@ -29,53 +61,172 @@ export default function About() {
             alignItems: "start",
           }}
         >
-          {/* ── Left: big headline ── */}
+          {/* ── Left: headline + avatar card + chips ── */}
           <FadeIn direction="left">
             <h2
               style={{
                 fontFamily: "'Geist', sans-serif",
                 fontWeight: 800,
-                fontSize: "clamp(2.5rem, 4.5vw, 4rem)",
+                fontSize: "clamp(2.2rem, 4vw, 3.75rem)",
                 letterSpacing: "-0.025em",
                 lineHeight: 1.05,
                 color: "var(--text)",
                 textTransform: "uppercase",
+                marginBottom: "2rem",
               }}
             >
               Crafting{" "}
-              <span style={{ color: "var(--accent)" }}>digital</span>
+              <span
+                style={{
+                  background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                digital
+              </span>
               <br />experiences
             </h2>
 
-            {/* Quick info pills */}
+            {/* Avatar / initials card */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "1.25rem",
+                padding: "1.25rem",
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                borderRadius: "var(--radius-lg)",
+                marginBottom: "1.5rem",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              {/* Glow behind */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "-30px",
+                  left: "-20px",
+                  width: "120px",
+                  height: "120px",
+                  borderRadius: "50%",
+                  background: "var(--accent)",
+                  filter: "blur(40px)",
+                  opacity: 0.08,
+                  pointerEvents: "none",
+                }}
+              />
+
+              {/* Monogram circle */}
+              <div
+                style={{
+                  width: 64,
+                  height: 64,
+                  borderRadius: "50%",
+                  background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "'Geist', sans-serif",
+                  fontWeight: 800,
+                  fontSize: "1.3rem",
+                  color: "#fff",
+                  flexShrink: 0,
+                  boxShadow: "0 0 24px rgba(139,92,246,0.4)",
+                }}
+              >
+                AK
+              </div>
+
+              {/* Info */}
+              <div style={{ flex: 1 }}>
+                <p
+                  style={{
+                    fontFamily: "'Geist', sans-serif",
+                    fontWeight: 700,
+                    fontSize: "1rem",
+                    color: "var(--text)",
+                    marginBottom: "0.2rem",
+                  }}
+                >
+                  {personalInfo.name}
+                </p>
+                <p
+                  style={{
+                    fontSize: "0.82rem",
+                    fontWeight: 500,
+                    color: "var(--text-2)",
+                    fontFamily: "var(--font-body)",
+                  }}
+                >
+                  {personalInfo.title}
+                </p>
+                <p
+                  style={{
+                    fontSize: "0.75rem",
+                    color: "var(--text-3)",
+                    marginTop: "0.3rem",
+                    fontFamily: "var(--font-body)",
+                  }}
+                >
+                  {personalInfo.location}
+                </p>
+              </div>
+
+              {/* Status dot */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
+                  padding: "0.3rem 0.7rem",
+                  background: "rgba(16,185,129,0.08)",
+                  border: "1px solid rgba(16,185,129,0.2)",
+                  borderRadius: "100px",
+                  alignSelf: "flex-start",
+                }}
+              >
+                <span
+                  style={{ width: 6, height: 6, borderRadius: "50%", background: "#10B981", display: "block" }}
+                />
+                <span
+                  style={{
+                    fontSize: "0.62rem",
+                    fontWeight: 700,
+                    color: "#34d399",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    fontFamily: "var(--font-body)",
+                  }}
+                >
+                  Open
+                </span>
+              </div>
+            </div>
+
+            {/* Contact chips */}
             <div
               style={{
                 display: "flex",
                 flexWrap: "wrap",
                 gap: "0.5rem",
-                marginTop: "2rem",
+                marginBottom: "1.5rem",
               }}
             >
               {[
-                { icon: <MapPin size={11} />, text: personalInfo.location },
-                { icon: <Mail size={11} />,   text: personalInfo.email, href: `mailto:${personalInfo.email}` },
-                { icon: <Phone size={11} />,  text: personalInfo.phone, href: `tel:${personalInfo.phone}` },
+                { icon: <MapPin size={12} />, text: personalInfo.location, href: undefined },
+                { icon: <Mail size={12} />, text: personalInfo.email, href: `mailto:${personalInfo.email}` },
+                { icon: <Phone size={12} />, text: personalInfo.phone, href: `tel:${personalInfo.phone}` },
               ].map(({ icon, text, href }) =>
                 href ? (
-                  <a
-                    key={text}
-                    href={href}
-                    className="exp-tag"
-                    style={{ gap: "0.4rem", display: "inline-flex", alignItems: "center", textDecoration: "none" }}
-                  >
+                  <a key={text} href={href} className="info-chip">
                     {icon} {text}
                   </a>
                 ) : (
-                  <span
-                    key={text}
-                    className="exp-tag"
-                    style={{ gap: "0.4rem", display: "inline-flex", alignItems: "center" }}
-                  >
+                  <span key={text} className="info-chip" style={{ cursor: "default" }}>
                     {icon} {text}
                   </span>
                 )
@@ -83,7 +234,7 @@ export default function About() {
             </div>
 
             {/* Social links */}
-            <div style={{ display: "flex", gap: "0.75rem", marginTop: "2rem" }}>
+            <div style={{ display: "flex", gap: "0.6rem" }}>
               <a
                 href={personalInfo.github}
                 target="_blank"
@@ -107,56 +258,113 @@ export default function About() {
             </div>
           </FadeIn>
 
-          {/* ── Right: bio text ── */}
+          {/* ── Right: bio text + trait cards ── */}
           <FadeIn direction="right" delay={0.1}>
             <p
               style={{
-                fontSize: "1.05rem",
-                lineHeight: 1.8,
+                fontFamily: "var(--font-body)",
+                fontSize: "1rem",
+                lineHeight: 1.85,
                 color: "var(--text-2)",
-                marginBottom: "2rem",
+                marginBottom: "2.5rem",
+                borderLeft: "2px solid var(--accent)",
+                paddingLeft: "1.25rem",
               }}
             >
               {personalInfo.bio}
             </p>
 
-            {/* Trait list */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              {[
-                { label: "Mobile Development", detail: "Flutter · iOS · Android" },
-                { label: "Cloud & DevOps",     detail: "AWS · Jenkins · Docker · Grafana" },
-                { label: "Web Development",    detail: "React.js · TypeScript · .NET" },
-              ].map(({ label, detail }) => (
+            {/* Trait feature cards */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+              {traits.map(({ label, detail, icon, color }) => (
                 <div
                   key={label}
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "space-between",
-                    paddingBlock: "0.875rem",
-                    borderBottom: "1px solid var(--border)",
+                    gap: "1rem",
+                    padding: "1rem 1.25rem",
+                    background: "var(--surface)",
+                    border: "1px solid var(--border)",
+                    borderRadius: "var(--radius)",
+                    transition: "border-color 0.25s, box-shadow 0.25s",
+                    cursor: "default",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLDivElement).style.borderColor = `${color}40`;
+                    (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 20px ${color}15`;
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLDivElement).style.borderColor = "var(--border)";
+                    (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
                   }}
                 >
-                  <span
+                  {/* Icon bubble */}
+                  <div
                     style={{
-                      fontWeight: 600,
-                      fontSize: "0.9rem",
-                      color: "var(--text)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.04em",
+                      width: 40,
+                      height: 40,
+                      borderRadius: "10px",
+                      background: `${color}12`,
+                      border: `1px solid ${color}25`,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "1.1rem",
+                      flexShrink: 0,
                     }}
                   >
-                    {label}
-                  </span>
-                  <span className="caption" style={{ color: "var(--text-3)" }}>
-                    {detail}
-                  </span>
+                    {icon}
+                  </div>
+
+                  <div style={{ flex: 1 }}>
+                    <p
+                      style={{
+                        fontWeight: 700,
+                        fontSize: "0.88rem",
+                        color: "var(--text)",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.05em",
+                        fontFamily: "var(--font-body)",
+                        marginBottom: "0.15rem",
+                      }}
+                    >
+                      {label}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: "0.75rem",
+                        color: "var(--text-3)",
+                        letterSpacing: "0.04em",
+                        fontFamily: "var(--font-body)",
+                      }}
+                    >
+                      {detail}
+                    </p>
+                  </div>
+
+                  <div
+                    style={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: "50%",
+                      background: color,
+                      boxShadow: `0 0 8px ${color}80`,
+                      flexShrink: 0,
+                    }}
+                  />
                 </div>
               ))}
             </div>
           </FadeIn>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          #about .c > div { grid-template-columns: 1fr !important; gap: 3rem !important; }
+        }
+      `}</style>
     </section>
   );
 }

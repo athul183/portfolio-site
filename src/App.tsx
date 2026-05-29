@@ -63,14 +63,15 @@ function Loader({ onDone }: { onDone: () => void }) {
           top: "1.75rem",
           left: "50%",
           transform: "translateX(-50%)",
-          fontFamily: "'Geist', sans-serif",
+          fontFamily: "var(--font-display, 'Geist', sans-serif)",
           fontWeight: 700,
           fontSize: "0.85rem",
           letterSpacing: "0.15em",
           textTransform: "uppercase",
-          color: "#0b080c",
+          color: "#3b1d8a",
           opacity: expanding ? 0 : 1,
           transition: "opacity 0.4s",
+          whiteSpace: "nowrap",
         }}
       >
         Athulraj K
